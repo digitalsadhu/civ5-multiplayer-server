@@ -26,26 +26,35 @@ app.post('/game', function (req, res) {
 
 app.get('/sync/:modified', function (req, res) {
   console.log('[INFO]', 'client requested sync')
-  //if file is newer on server, respond
+
   var filepath = [__dirname, 'save-game-files', filename].join('/')
-  var stats = fs.stat(filepath, function (err, stats) {
-    if (err) throw err
 
-    var modified = stats.mtime.getTime()
+  fs.exists(filepath, function (exists) {
 
-    if (modified > req.params.modified) {
-      console.log('[INFO]', 'client out of date, syncing...')
-      var readstream = fs.createReadStream(filepath)
-      .on('end', function () {
-        console.log('[INFO]', 'synced')
-      })
-
-      readstream.pipe(res)
-    }
-    else {
+    if (!exists) {
       res.status(304)
-      res.send('')
+      return res.send('')
     }
+
+    var stats = fs.stat(filepath, function (err, stats) {
+      if (err) throw err
+
+      var modified = stats.mtime.getTime()
+
+      if (modified > req.params.modified) {
+        console.log('[INFO]', 'client out of date, syncing...')
+        var readstream = fs.createReadStream(filepath)
+        .on('end', function () {
+          console.log('[INFO]', 'synced')
+        })
+
+        readstream.pipe(res)
+      }
+      else {
+        res.status(304)
+        res.send('')
+      }
+    })
   })
 })
 
