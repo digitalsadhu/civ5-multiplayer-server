@@ -1,3 +1,5 @@
+'use strict';
+
 var express    = require('express')
   , env        = require('envoodoo')
   , fs         = require('fs')
