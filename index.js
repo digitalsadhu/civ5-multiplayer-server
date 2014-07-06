@@ -4,11 +4,11 @@ var express    = require('express')
   , env        = require('envoodoo')
   , fs         = require('fs')
 
-env()
+env();
 
-var filename = process.env.GAME_FILE_NAME
+var filename = process.env.GAME_FILE_NAME;
 
-var app = express()
+var app = express();
 
 app.post('/game', function (req, res) {
   var write = fs.createWriteStream([
