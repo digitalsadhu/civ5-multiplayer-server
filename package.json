@@ -4,7 +4,7 @@
   "description": "A server to manage synced Civilization 5 save game files and notify players of their turn",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js"
   },
   "repository": {
