@@ -1,24 +1,7 @@
 'use strict';
 
-var fs = require('fs')
-
-/**
- * Returns path to the save game file
- * @return {string}
- */
-function saveGameFilePath() {
-  var filename = process.env.GAME_FILE_NAME
-  return [__dirname, 'save-game-files', filename].join('/')
-}
-
-/**
- * Creates a read stream from the save game file
- * @return {object} read stream
- */
-function createSaveGameReadStream() {
-  var filepath = saveGameFilePath()
-  return fs.createReadStream(filepath)
-}
+var fs           = require('fs')
+  , saveGameFile = require('./savegamefile')()
 
 /**
  * Asyncronously checks if a file is newer than a given modified unix timestamp
@@ -42,9 +25,9 @@ function fileNewerThanModified(filepath, modified, cb) {
  * @param  {Function} cb       - receives true or false
  */
 function shouldSendFile(modified, cb) {
-  fs.exists(saveGameFilePath(), function (exists) {
+  fs.exists(saveGameFile.path(), function (exists) {
     if (!exists) return cb(false)
-    fileNewerThanModified(saveGameFilePath(), modified, cb)
+    fileNewerThanModified(saveGameFile.path(), modified, cb)
   })
 }
 
@@ -58,7 +41,7 @@ module.exports = function (req, res) {
     if (shouldSendFile) {
       process.stdout.write('[SERVER] client out of date, syncing... ')
 
-      createSaveGameReadStream()
+      saveGameFile.readStream()
         .on('end', function () { process.stdout.write('done\n') })
         .pipe(res)
     }
