@@ -28,6 +28,7 @@
     "config.json": "0.0.3",
     "express": "^4.5.0",
     "fileupload": "^0.3.0",
+    "handlebars": "^2.0.0-alpha.4",
     "nodemailer": "^1.2.1"
   }
 }

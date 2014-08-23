@@ -1,10 +1,10 @@
 {
     "PORT": 3501,
-    "SAVE_FILENAME": "latest.Civ5Save",
+    "SAVE_FILENAME": "shared.Civ5Save",
     "GMAIL_USERNAME": "yourname@gmail.com",
     "GMAIL_PASSWORD": "hunter2",
     "NOTIFICATION_SUBJECT": "[Civ V Server] It's your turn!",
-    "NOTIFICATION_TEXT_FILENAME": "turn_notification.txt",
+    "NOTIFICATION_TEMPLATE": "turn_notification.txt",
     "PLAYERS": [
         {
             "name": "Player 1",
