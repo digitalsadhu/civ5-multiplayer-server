@@ -25,9 +25,10 @@
   "homepage": "https://github.com/digitalsadhu/civ5-multiplayer-server",
   "dependencies": {
     "chalk": "^0.5.1",
-    "envoodoo": "^2.0.1",
+    "config.json": "0.0.3",
     "express": "^4.5.0",
     "fileupload": "^0.3.0",
+    "handlebars": "^2.0.0-alpha.4",
     "nodemailer": "^1.2.1"
   }
 }

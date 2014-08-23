@@ -1,14 +1,15 @@
 'use strict';
 
-var fs    = require('fs')
-  , queue = require('./queue')()
+var config = require('config.json')()
+  , fs     = require('fs')
+  , queue  = require('./queue')()
 
 /**
  * Creates a game file write stream
  * @return {object} write stream object
  */
 function createGameFileStream() {
-  var filename = process.env.GAME_FILE_NAME
+  var filename = config.SAVE_FILENAME
     , filepath = [__dirname, 'save-game-files', filename].join('/')
 
   return fs.createWriteStream(filepath)
