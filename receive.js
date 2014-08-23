@@ -1,6 +1,7 @@
 'use strict';
 
-var fs = require('fs')
+var fs    = require('fs')
+  , queue = require('./queue')()
 
 /**
  * Creates a game file write stream
@@ -25,6 +26,7 @@ module.exports = function (req, res) {
   req.on('end', function () {
     process.stdout.write('done\n')
     res.end()
+    queue.iterate()
   })
 
   process.stdout.write('[SERVER] receiving data... ')
