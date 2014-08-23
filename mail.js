@@ -3,6 +3,7 @@
 var nodemailer = require('nodemailer')
   , env        = require('envoodoo')
   , fs         = require('fs')
+  , errors     = require('./errors')()
 
 env()
 
@@ -22,20 +23,15 @@ var mailOptions = {
 }
 
 fs.readFile(process.env.MAIL_TEXT_FILENAME, 'utf8', function (error, data) {
-  if (error) {
-    return console.log(error)
-  }
+  if (error) return errors.handle(error)
   mailOptions.text = data
 })
 
 function sendNotificationMail(to) {
   mailOptions.to = to
   transporter.sendMail(mailOptions, function (error, response) {
-    if (error) {
-      console.log('[SERVER]', error)
-    } else {
-      console.log('[SERVER] Turn notification mail sent to', to)
-    }
+    if (error) return errors.handle(error)
+    console.log('[SERVER] Turn notification mail sent to', to)
   })
 }
 
@@ -44,4 +40,3 @@ module.exports = function () {
     sendNotificationMail: sendNotificationMail
   }
 }
-
