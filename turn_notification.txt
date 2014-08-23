@@ -1,4 +1,4 @@
-It's your turn! The last player completed their turn, and now you're up.
+It's your turn! {lastPlayer} completed their turn, and now you're up.
 
 "Is it a fact - or have I dreamt it - that, by means of electricity, the world of matter has become a great nerve, vibrating thousands of miles in a breathless point of time?"
 - Nathaniel Hawthorne

@@ -1,21 +1,22 @@
 'use strict';
 
-var env  = require('envoodoo')
-  , mail = require('./mail')()
+var config = require('config.json')()
+  , mail   = require('./mail')()
 
-env()
 
-var queue = process.env.PARTICIPANTS.split(',')
+var players = config.PLAYERS
 var index = 0
 
 function iterateQueue() {
+    var prevPlayer = players[index]
+
     index++
-    if (index > queue.length - 1)
+    if (index > players.length - 1)
         index = 0
 
-    console.log('[SERVER]', queue[index], 'is up')
+    console.log('[SERVER]', players[index].name, 'is up')
 
-    mail.sendNotificationMail(queue[index])
+    mail.sendNotificationMail(players[index], prevPlayer)
 }
 
 module.exports = function () {
